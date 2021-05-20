@@ -1,6 +1,8 @@
 ﻿using GestorDocumental.Core.Entities;
+using GestorDocumental.Core.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace GestorDocumental.Infrastucture.Data.Configurations
 {
@@ -16,7 +18,7 @@ namespace GestorDocumental.Infrastucture.Data.Configurations
                 .HasDefaultValueSql("NEWID()");
 
             builder.Property(e => e.UserName)
-                .HasMaxLength(100)
+                .HasMaxLength(50)
                 .IsRequired();
 
             builder.Property(e => e.Password)
@@ -24,7 +26,12 @@ namespace GestorDocumental.Infrastucture.Data.Configurations
                 .HasMaxLength(200);
 
             builder.Property(e => e.Rol)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(20)
+                .HasConversion(
+                    x => x.ToString(),
+                    x => (TipoRol)Enum.Parse(typeof(TipoRol), x)
+                    );
 
             builder.Property(e => e.TerceroId)
                .IsRequired();

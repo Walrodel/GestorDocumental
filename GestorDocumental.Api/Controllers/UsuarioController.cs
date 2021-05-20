@@ -14,15 +14,15 @@ using System.Threading.Tasks;
 
 namespace GestorDocumental.Api.Controllers
 {
-    [SwaggerTag("Servicio para la administración de terceros.")]
+    [SwaggerTag("Servicio para la administración de usuarios.")]
     [Route("api/[controller]")]
     [ApiController]
-    public class TerceroController : ControllerBase
+    public class UsuarioController : ControllerBase
     {
-        private readonly ITerceroService _service;
+        private readonly IUsuarioService _service;
         private readonly IMapper _mapper;
 
-        public TerceroController(ITerceroService service, IMapper mapper)
+        public UsuarioController(IUsuarioService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
@@ -33,21 +33,21 @@ namespace GestorDocumental.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        /// <response code="200">Retorna el tercero creado.</response>
+        /// <response code="200">Retorna el usaurio creado.</response>
         /// <response code="400">Errores de validación.</response>
         /// <response code="500">Error interno en el servidor.</response>
         [HttpPost]
-        public async Task<IActionResult> Add(TerceroRequest request)
+        public async Task<IActionResult> Add(UsuarioRequest request)
         {
-            var tercero = _mapper.Map<Tercero>(request);
-            await _service.Add(tercero);
-            var terceroDto = _mapper.Map<TerceroDto>(tercero);
-            var respose = new ApiResponse<TerceroDto>(terceroDto);
+            var usuario = _mapper.Map<Usuario>(request);
+            await _service.Add(usuario);
+            var usuarioDto = _mapper.Map<UsuarioDto>(usuario);
+            var respose = new ApiResponse<UsuarioDto>(usuarioDto);
             return Ok(respose);
         }
 
         /// <summary>
-        /// Actualización de tercero por Id.
+        /// Actualización de usuario por Id.
         /// </summary>
         /// <param name="Id"></param>
         /// <param name="request"></param>
@@ -55,54 +55,54 @@ namespace GestorDocumental.Api.Controllers
         /// <response code="400">Errores de validación.</response>
         /// <response code="500">Error interno en el servidor.</response>
         [HttpPut("{Id}")]
-        public async Task<IActionResult> Update(Guid Id, TerceroRequest request)
+        public async Task<IActionResult> Update(Guid Id, UsuarioRequest request)
         {
-            var tercero = _mapper.Map<Tercero>(request);
-            tercero.Id = Id;
-            var result = await _service.Update(tercero);
+            var usuario = _mapper.Map<Usuario>(request);
+            usuario.Id = Id;
+            var result = await _service.Update(usuario);
             var respose = new ApiResponse<bool>(result);
             return Ok(respose);
         }
 
         /// <summary>
-        /// Consultar tercero por Id.
+        /// Consultar usuario por Id.
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        /// <response code="200">Retorna el tercero.</response>
+        /// <response code="200">Retorna el usuario.</response>
         /// <response code="400">Errores de validación.</response>
         /// <response code="500">Error interno en el servidor.</response>
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetById(Guid Id)
         {
-            var tercero = await _service.GetById(Id);
-            var terceroDto = _mapper.Map<TerceroDto>(tercero);
-            var respose = new ApiResponse<TerceroDto>(terceroDto);
+            var usuario = await _service.GetById(Id);
+            var usuarioDto = _mapper.Map<UsuarioDto>(usuario);
+            var respose = new ApiResponse<UsuarioDto>(usuarioDto);
             return Ok(respose);
         }
 
         /// <summary>
-        /// Consulta de terceros por sus respectivos filtros.
+        /// Consulta de usuarios por sus respectivos filtros.
         /// </summary>
         /// <param name="filters"></param>
         /// <returns></returns>
-        /// <response code="200">Retorna los terceros con su respectiva paginación.</response>
+        /// <response code="200">Retorna los usuarios con su respectiva paginación.</response>
         /// <response code="400">Errores de validación.</response>
         /// <response code="500">Error interno en el servidor.</response>
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] TerceroQueryFilter filters)
+        public async Task<IActionResult> GetAll([FromQuery] UsuarioQueryFilter filters)
         {
-            var terceros = await _service.GetAll(filters);
-            var tercerosDto = _mapper.Map<IEnumerable<TerceroDto>>(terceros);
-            var respose = new ApiResponse<IEnumerable<TerceroDto>>(tercerosDto);
+            var usuarios = await _service.GetAll(filters);
+            var usuariosDto = _mapper.Map<IEnumerable<UsuarioDto>>(usuarios);
+            var respose = new ApiResponse<IEnumerable<UsuarioDto>>(usuariosDto);
             var matadata = new
             {
-                terceros.TotalCount,
-                terceros.PageSize,
-                terceros.CurrentPage,
-                terceros.TotlaPages,
-                terceros.HasNextPage,
-                terceros.HasPreviousPage
+                usuarios.TotalCount,
+                usuarios.PageSize,
+                usuarios.CurrentPage,
+                usuarios.TotlaPages,
+                usuarios.HasNextPage,
+                usuarios.HasPreviousPage
 
             };
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(matadata));

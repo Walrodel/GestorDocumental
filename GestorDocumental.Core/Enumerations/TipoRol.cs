@@ -1,6 +1,6 @@
 ﻿namespace GestorDocumental.Core.Enumerations
 {
-    public enum Rol
+    public enum TipoRol
     {
         Administrador = 1,
         Gestor,

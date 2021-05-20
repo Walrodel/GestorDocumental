@@ -44,6 +44,8 @@ namespace GestorDocumental.Api
 
             services.AddTransient<ITerceroService, TerceroService>();
 
+            services.AddTransient<IUsuarioService, UsuarioService>();
+
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();

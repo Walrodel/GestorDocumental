@@ -14,9 +14,9 @@ namespace GestorDocumental.Infrastucture.Migrations
                     Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
                     FechaCrea = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     FechaActualiza = table.Column<DateTime>(nullable: true),
-                    Identificaion = table.Column<string>(nullable: true),
+                    Identificaion = table.Column<string>(maxLength: 20, nullable: false),
                     Nombres = table.Column<string>(maxLength: 100, nullable: false),
-                    Apellidos = table.Column<string>(maxLength: 200, nullable: true),
+                    Apellidos = table.Column<string>(maxLength: 100, nullable: true),
                     Correo = table.Column<string>(maxLength: 100, nullable: false),
                     Direccion = table.Column<string>(maxLength: 100, nullable: false),
                     Telefono = table.Column<string>(maxLength: 20, nullable: false)
@@ -65,9 +65,9 @@ namespace GestorDocumental.Infrastucture.Migrations
                     Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
                     FechaCrea = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     FechaActualiza = table.Column<DateTime>(nullable: true),
-                    UserName = table.Column<string>(maxLength: 100, nullable: false),
+                    UserName = table.Column<string>(maxLength: 50, nullable: false),
                     Password = table.Column<string>(maxLength: 200, nullable: false),
-                    Rol = table.Column<int>(nullable: false),
+                    Rol = table.Column<string>(nullable: false),
                     TerceroId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>

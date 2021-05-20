@@ -11,6 +11,9 @@ namespace GestorDocumental.Infrastucture.Mappings
         {
             CreateMap<TerceroRequest, Tercero>();
             CreateMap<Tercero, TerceroDto>();
+
+            CreateMap<UsuarioRequest, Usuario>();
+            CreateMap<Usuario, UsuarioDto>();
         }
     }
 }

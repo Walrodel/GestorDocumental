@@ -10,6 +10,7 @@ namespace GestorDocumental.Infrastucture.Repositories
         private readonly GestorDocumentalContext _context;
 
         private readonly IRepository<Tercero> _terceroRepositoty;
+        private readonly IRepository<Usuario> _usuarioRepositoty;
 
         public UnitOfWork(GestorDocumentalContext context)
         {
@@ -17,6 +18,7 @@ namespace GestorDocumental.Infrastucture.Repositories
         }
 
         public IRepository<Tercero> TerceroRepository => _terceroRepositoty ?? new BaseRepository<Tercero>(_context);
+        public IRepository<Usuario> UsuarioRepository => _usuarioRepositoty ?? new BaseRepository<Usuario>(_context);
 
         public void Dispose()
         {

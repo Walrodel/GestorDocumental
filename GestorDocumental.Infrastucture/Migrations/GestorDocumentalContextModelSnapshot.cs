@@ -76,8 +76,8 @@ namespace GestorDocumental.Infrastucture.Migrations
                         .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("Apellidos")
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Correo")
                         .IsRequired()
@@ -98,7 +98,9 @@ namespace GestorDocumental.Infrastucture.Migrations
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Identificaion")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Nombres")
                         .IsRequired()
@@ -135,16 +137,17 @@ namespace GestorDocumental.Infrastucture.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
 
-                    b.Property<int>("Rol")
-                        .HasColumnType("int");
+                    b.Property<string>("Rol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("TerceroId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
