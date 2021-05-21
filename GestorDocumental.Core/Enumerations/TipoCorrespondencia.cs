@@ -2,7 +2,7 @@
 {
     public enum TipoCorrespondencia
     {
-        Interna = 1,
-        Externa
+        CI = 1,
+        CE
     }
 }

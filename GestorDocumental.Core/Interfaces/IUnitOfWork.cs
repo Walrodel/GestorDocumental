@@ -8,6 +8,7 @@ namespace GestorDocumental.Core.Interfaces
     {
         IRepository<Tercero> TerceroRepository { get; }
         IRepository<Usuario> UsuarioRepository { get; }
+        ICorrespondenciaRepository CorrespondenciaRepository { get; }
 
         void SaveChanges();
         Task SaveChangesAsyn();

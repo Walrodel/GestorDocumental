@@ -25,6 +25,7 @@ namespace GestorDocumental.Infrastucture.Validators
             RuleFor(e => e.Correo)
                .NotNull()
                .NotEmpty()
+               .EmailAddress()
                .Length(10, 100);
 
             RuleFor(e => e.Direccion)

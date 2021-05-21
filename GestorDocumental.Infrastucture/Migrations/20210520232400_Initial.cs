@@ -35,11 +35,10 @@ namespace GestorDocumental.Infrastucture.Migrations
                     FechaActualiza = table.Column<DateTime>(nullable: true),
                     Numero = table.Column<int>(nullable: false),
                     Consecutivo = table.Column<string>(maxLength: 10, nullable: false),
-                    Tipo = table.Column<int>(nullable: false),
+                    Tipo = table.Column<string>(maxLength: 2, nullable: false),
                     UrlArvhivo = table.Column<string>(maxLength: 200, nullable: false),
                     RemitenteId = table.Column<Guid>(nullable: false),
-                    DestinatarioId = table.Column<Guid>(nullable: false),
-                    RemitemteId = table.Column<Guid>(nullable: true)
+                    DestinatarioId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,10 +48,10 @@ namespace GestorDocumental.Infrastucture.Migrations
                         column: x => x.DestinatarioId,
                         principalTable: "Terceros",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Correspondencias_Terceros_RemitemteId",
-                        column: x => x.RemitemteId,
+                        name: "FK_Correspondencias_Terceros_RemitenteId",
+                        column: x => x.RemitenteId,
                         principalTable: "Terceros",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -67,7 +66,7 @@ namespace GestorDocumental.Infrastucture.Migrations
                     FechaActualiza = table.Column<DateTime>(nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: false),
                     Password = table.Column<string>(maxLength: 200, nullable: false),
-                    Rol = table.Column<string>(nullable: false),
+                    Rol = table.Column<string>(maxLength: 20, nullable: false),
                     TerceroId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -87,9 +86,9 @@ namespace GestorDocumental.Infrastucture.Migrations
                 column: "DestinatarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Correspondencias_RemitemteId",
+                name: "IX_Correspondencias_RemitenteId",
                 table: "Correspondencias",
-                column: "RemitemteId");
+                column: "RemitenteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_TerceroId",

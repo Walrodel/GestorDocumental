@@ -12,7 +12,7 @@ namespace GestorDocumental.Core.Entities
         public Guid RemitenteId { get; set; }
         public Guid DestinatarioId { get; set; }
 
-        public Tercero Remitemte { get; set; }
+        public Tercero Remitente { get; set; }
         public Tercero Destinatario { get; set; }
     }
 }

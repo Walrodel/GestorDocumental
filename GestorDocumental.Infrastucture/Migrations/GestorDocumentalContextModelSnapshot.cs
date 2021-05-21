@@ -45,14 +45,13 @@ namespace GestorDocumental.Infrastucture.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("RemitemteId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("RemitenteId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Tipo")
-                        .HasColumnType("int");
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(2)")
+                        .HasMaxLength(2);
 
                     b.Property<string>("UrlArvhivo")
                         .IsRequired()
@@ -63,7 +62,7 @@ namespace GestorDocumental.Infrastucture.Migrations
 
                     b.HasIndex("DestinatarioId");
 
-                    b.HasIndex("RemitemteId");
+                    b.HasIndex("RemitenteId");
 
                     b.ToTable("Correspondencias");
                 });
@@ -139,7 +138,8 @@ namespace GestorDocumental.Infrastucture.Migrations
 
                     b.Property<string>("Rol")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<Guid>("TerceroId")
                         .HasColumnType("uniqueidentifier");
@@ -161,12 +161,14 @@ namespace GestorDocumental.Infrastucture.Migrations
                     b.HasOne("GestorDocumental.Core.Entities.Tercero", "Destinatario")
                         .WithMany()
                         .HasForeignKey("DestinatarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GestorDocumental.Core.Entities.Tercero", "Remitemte")
+                    b.HasOne("GestorDocumental.Core.Entities.Tercero", "Remitente")
                         .WithMany()
-                        .HasForeignKey("RemitemteId");
+                        .HasForeignKey("RemitenteId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GestorDocumental.Core.Entities.Usuario", b =>
