@@ -18,6 +18,10 @@ namespace GestorDocumental.Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureLogging((_, builder) =>
+                {
+                    builder.AddFile("logs/app-{Date}.json", isJson: true);
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
